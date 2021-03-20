@@ -67,7 +67,7 @@ describe('Contacts Controller', () => {
     const response = await request.get('/contact').set('x-access-token', token).send({userId: data.user.id})
 
     expect(response.status).toBe(201)
-    // expect(response.body).toEqual(expect.objectContaining({"contacts": {"-MWGTlvERnPo2fTL9KF8": {"address": "Endereço completo", "created_at": "Sat Mar 20 2021 18:12:06 GMT-0300 (Brasilia Standard Time)", "firstName": "Fernanda", "id": "93efac9c-e170-4e62-a97b-7d964ff6a84c", "lastName": "Penna", "phoneNumber": "+55027998753750", "userId": "3c2a8553-027f-44ae-b3bc-dbc2eb722651"}}}))
+    expect(response.body).toHaveProperty("contacts")
   })
 
 })
