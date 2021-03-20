@@ -2,7 +2,7 @@
 
 ## :computer: Project
 An address Book API with Node.js, Express, Postgres and Firebase.
-Regiter your contacts in web and mobile using this API.
+Register your contacts in web and mobile using this API.
 </br>
 
 </br>
