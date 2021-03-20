@@ -10,7 +10,7 @@ const hashProvider = new BCryptHashProvider();
 const jwtAuthLogin = new JWTAuthentication();
 
 export default class UsersController {
-  async show(request: Request, response: Response): Promise<Response> {
+  async getAll(request: Request, response: Response): Promise<Response> {
       const usersRepository = getCustomRepository(UserRepository)
   
       const users = await usersRepository.find()
@@ -18,6 +18,15 @@ export default class UsersController {
       return response.status(201).json({ users })
 
   }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const usersRepository = getCustomRepository(UserRepository)
+
+    const user = await usersRepository.findById(request.user)
+
+    return response.status(201).json({ user })
+
+}
 
   async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body

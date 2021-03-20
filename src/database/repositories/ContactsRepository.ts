@@ -27,7 +27,7 @@ class ContactsRepository extends Repository<any> {
     created_at: string) : Promise<void> {
 
     // --> users (collection) -> user-id (document) -> contacts (collection) -> contact (document)
-    db.ref(`/users-${process.env.FIREBASE_INTEGRATION_TEST}/` + `user-${userId}`+ '/contacts/').push({
+    db.ref(`/users${"-" + process.env.FIREBASE_INTEGRATION_TEST}/` + `user-${userId}`+ '/contacts/').push({
       id: uuid(),
       userId,
       firstName,

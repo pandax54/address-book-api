@@ -2,6 +2,8 @@ import supertest from 'supertest'
 import { app } from '../app'
 import { PsQLConnectionManager } from '../database/connection'
 import { UserRepository } from '../database/repositories/UserRepository'
+import JWTAuthentication from "../utils/generateAuth";
+const jwtAuthLogin = new JWTAuthentication();
 
 describe('Users Controller', () => {
   const psqlConnection = new PsQLConnectionManager()
@@ -33,5 +35,30 @@ describe('Users Controller', () => {
     expect(response.status).toBe(401)
     expect(response.body).toEqual({ message: "Email/Password does not match.", status: "error" })
   })
+
+  it('Should return all the users registered GET:/users success', async () => {
+    
+    const responseCreateUser = await request.post('/users').send(fakeUser)
+    const data =  JSON.parse(responseCreateUser.text)
+    const token = await jwtAuthLogin.generateJWT(data.user.id)
+
+    const response = await request.get('/users').set('x-access-token', token)
+
+    expect(response.status).toBe(201)
+    expect(response.body).toHaveProperty("users")
+  })
+
+  it('Should return the logged user GET:/users/me success', async () => {
+    
+    const responseCreateUser = await request.post('/users').send(fakeUser)
+    const data =  JSON.parse(responseCreateUser.text)
+    const token = await jwtAuthLogin.generateJWT(data.user.id)
+
+    const response = await request.get('/users/me').set('x-access-token', token)
+
+    expect(response.status).toBe(201)
+    expect(response.body).toHaveProperty("user")
+  })
+  
 
 })

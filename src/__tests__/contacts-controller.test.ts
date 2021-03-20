@@ -69,5 +69,4 @@ describe('Contacts Controller', () => {
     expect(response.status).toBe(201)
     expect(response.body).toHaveProperty("contacts")
   })
-
 })
