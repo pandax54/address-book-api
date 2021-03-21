@@ -1,0 +1,327 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server",
+    "version": "1.0.0",
+    "title": "Address Book API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create new account",
+        "description": "Create new user account and login",
+        "operationId": "createUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "E-mail",
+            "in": "query",
+            "description": "The user email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "description": "The user password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponseUser"
+            },
+            "headers": {
+              "x-access-token": {
+                "type": "string",
+                "format": "date-time",
+                "description": "token expires in 1 day"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid input. Missing requirements."
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Returns the the logged user information",
+        "description": "The logged user can access its account information",
+        "operationId": "getUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "Headers",
+            "name": "x-access-token",
+            "description": "Authentication token provided in registration or login",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponseUser"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Without authentication token."
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "The user name for login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "headers": {
+              "x-access-token": {
+                "type": "string",
+                "format": "date-time",
+                "description": "token expires in 1 day"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/contact": {
+      "post": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "Add new contact",
+        "description": "Add new contact in user's account",
+        "operationId": "createContact",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "First Name",
+            "in": "query",
+            "description": "The contact first name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Last Name",
+            "in": "query",
+            "description": "The contact last name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Phone Number",
+            "in": "query",
+            "description": "The contact phone number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Address",
+            "in": "query",
+            "description": "The contact address",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "Headers",
+            "name": "x-access-token",
+            "description": "Authentication token provided in registration or login",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Contact added with success!"
+          },
+          "401": {
+            "description": "Invalid input. Missing requirements."
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "Get all the contacts of the logged user",
+        "description": "List of contact object",
+        "operationId": "listContacts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApiResponsContact"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Invalid input. Missing requirements."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uuid"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "UserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uuid"
+        },
+        "email": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "ContactResponse": {
+      "type": "object",
+      "properties": {
+        "contact-string": {
+          "type": "object",
+          "$ref": "#/definitions/Contact"
+        }
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "uuid"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "uuid"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ApiResponseUser": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/UserResponse"
+        }
+      }
+    },
+    "ApiResponseContact": {
+      "type": "object",
+      "properties": {
+        "contacts": {
+          "type": "object",
+          "$ref": "#/definitions/ContactResponse"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
