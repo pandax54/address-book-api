@@ -31,6 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
+    "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.31",
     "uuid": "^8.3.2"
   },
@@ -42,6 +43,7 @@
     "@types/jest": "^26.0.20",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/supertest": "^2.0.10",
+    "@types/swagger-ui-express": "^4.1.2",
     "@types/uuid": "^8.3.0",
     "jest": "^26.6.3",
     "supertest": "^6.1.3",

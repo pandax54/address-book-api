@@ -24,7 +24,7 @@ export default class UsersController {
 
     const user = await usersRepository.findById(request.user)
 
-    return response.status(201).json({ user })
+    return response.status(201).json({ user: classToClass(user) })
 
 }
 
@@ -48,6 +48,6 @@ export default class UsersController {
 
     const token = await jwtAuthLogin.generateJWT(user.id)
 
-    return response.header('x-access-token', token).status(201).json({ status: "ok", user: classToClass(user) });
+    return response.header('x-access-token', token).status(201).json({ user: classToClass(user) });
   }
 }

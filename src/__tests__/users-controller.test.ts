@@ -25,7 +25,7 @@ describe('Users Controller', () => {
 
     expect(response.status).toBe(201)
     expect(response.headers['x-access-token'])
-    expect(response.body).toEqual(expect.objectContaining({status: "ok", user: expect.objectContaining({email: 'fernanda@mail.com', id: data.user.id, created_at: data.user.created_at})  }))
+    expect(response.body).toEqual(expect.objectContaining({user: expect.objectContaining({email: 'fernanda@mail.com', id: data.user.id, created_at: data.user.created_at})  }))
   })
 
   it('Should return 401 (Unauthorized) on POST:/users if provided email is already in use', async () => {
@@ -36,17 +36,17 @@ describe('Users Controller', () => {
     expect(response.body).toEqual({ message: "Email/Password does not match.", status: "error" })
   })
 
-  it('Should return all the users registered GET:/users success', async () => {
+  // it('Should return all the users registered GET:/users success', async () => {
     
-    const responseCreateUser = await request.post('/users').send(fakeUser)
-    const data =  JSON.parse(responseCreateUser.text)
-    const token = await jwtAuthLogin.generateJWT(data.user.id)
+  //   const responseCreateUser = await request.post('/users').send(fakeUser)
+  //   const data =  JSON.parse(responseCreateUser.text)
+  //   const token = await jwtAuthLogin.generateJWT(data.user.id)
 
-    const response = await request.get('/users').set('x-access-token', token)
+  //   const response = await request.get('/users').set('x-access-token', token)
 
-    expect(response.status).toBe(201)
-    expect(response.body).toHaveProperty("users")
-  })
+  //   expect(response.status).toBe(201)
+  //   expect(response.body).toHaveProperty("users")
+  // })
 
   it('Should return the logged user GET:/users/me success', async () => {
     
