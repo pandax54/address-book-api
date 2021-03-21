@@ -13,7 +13,7 @@ Register your contacts in web and mobile using this API.
 
 - [TypeScript](https://github.com/Microsoft/TypeScript)
 - [Express](https://github.com/expressjs/express)
-- [React](https://github.com/facebook/react)
+- Nodejs
 - Firebase
 - Postgres
 - TypeORM
@@ -24,6 +24,8 @@ Register your contacts in web and mobile using this API.
 - ESLint
 - Jest
 - Supertest
+- Swagger Ui
+
 
 </br>
 
@@ -86,4 +88,19 @@ Dont forget to remove the example in the name of the file, the file must be like
 
 ```
 $ yarn dev
+```
+
+## Testing
+
+Create a test database and run the migrations before running the tests. Change the database name on ormconfig.json for the test database.
+
+```
+$ yarn test
+```
+
+## API DOCS
+
+For API docs access:
+```
+/api-docs
 ```
