@@ -10,7 +10,7 @@
     }
   },
   "paths": {
-    "/users": {
+    "/api/v1/users": {
       "post": {
         "tags": [
           "User"
@@ -45,13 +45,16 @@
               }
             }
           },
-          "401": {
-            "description": "Invalid input. Missing requirements."
+          "400": {
+            "description": "Invalid input. Must be a valid email. Or Missing requirements"
+          },
+          "409": {
+            "description": "Email already registered."
           }
         }
       }
     },
-    "/users/me": {
+    "/api/v1/users/me": {
       "get": {
         "tags": [
           "User"
@@ -64,9 +67,13 @@
         ],
         "parameters": [
           {
-            "in": "Headers",
+            "in": "header",
             "name": "x-access-token",
             "description": "Authentication token provided in registration or login",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
             "required": true
           }
         ],
@@ -78,13 +85,13 @@
             }
           },
           "401": {
-            "description": "Unauthorized. Without authentication token."
+            "description": "Unauthorized. Without authentication token. Or invalid Token."
           }
         }
       }
     },
-    "/login": {
-      "get": {
+    "/api/v1/login": {
+      "post": {
         "tags": [
           "Login"
         ],
@@ -122,7 +129,7 @@
         }
       }
     },
-    "/contact": {
+    "/api/v1/contact": {
       "post": {
         "tags": [
           "Contact"
@@ -143,18 +150,25 @@
             }
           },
           {
-            "in": "Headers",
+            "in": "header",
             "name": "x-access-token",
             "description": "Authentication token provided in registration or login",
-            "required": true
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "required": true
           }
+        }
         ],
         "responses": {
           "201": {
             "description": "Contact added with success!"
           },
-          "401": {
+          "400": {
             "description": "Invalid input. Missing requirements."
+          },
+          "401": {
+            "description": "Unauthorized. Without authentication token. Or invalid Token."
           }
         }
       },
@@ -170,11 +184,15 @@
         ],
         "parameters": [
           {
-            "in": "Headers",
+            "in": "header",
             "name": "x-access-token",
             "description": "Authentication token provided in registration or login",
-            "required": true
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "required": true
           }
+        }
         ],
         "responses": {
           "201": {
@@ -184,7 +202,7 @@
             }
           },
           "401": {
-            "description": "Invalid input. Missing requirements."
+            "description": "Unauthorized. Without authentication token. Or invalid Token."
           }
         }
       }
@@ -254,7 +272,30 @@
       "properties": {
         "contact-string": {
           "type": "object",
-          "$ref": "#/definitions/Contact"
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "phoneNumber": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
         }
       }
     },

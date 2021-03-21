@@ -32,8 +32,8 @@ describe('Users Controller', () => {
     await request.post('/users').send(fakeUser)
     const response = await request.post('/users').send(fakeUser)
 
-    expect(response.status).toBe(409)
-    expect(response.body).toEqual({ message: "Email already registered.", status: "error" })
+    expect(response.status).toBe(401)
+    expect(response.body).toEqual({ message: "Email/Password does not match.", status: "error" })
   })
 
   // it('Should return all the users registered GET:/users success', async () => {

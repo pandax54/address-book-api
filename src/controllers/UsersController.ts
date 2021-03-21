@@ -35,7 +35,7 @@ export default class UsersController {
 
     const userAlreadyExists = await usersRepository.findOne({ email })
     if (userAlreadyExists) {
-      throw new AppError("Email/Password does not match.", 401);
+      throw new AppError("Email already registered.", 409);
     }
     const hashedPassword = await hashProvider.generateHash(password);
 
