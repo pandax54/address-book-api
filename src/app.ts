@@ -13,7 +13,7 @@ import swaggerDocument from '../swagger.json'
 const app = express()
 app.use(cors());
 app.use(express.json())
-app.use(router)
+app.use('/api/v1', router);
 
 const options = {
   explorer: true
