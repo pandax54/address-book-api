@@ -29,10 +29,11 @@ describe('Contacts Controller', () => {
   it('Should return 400 (unauthorized) on POST:/contact if provided no authentication token', async () => {
     
     // create User
-    const responseUser = await request.post('/users').send(fakeUser)
+    const responseUser = await request.post('/api/v1/users').send(fakeUser)
     const data =  JSON.parse(responseUser.text)
+   
 
-    const response = await request.post('/contact').send({...fakeContact, userId: data.user.id})
+    const response = await request.post('/api/v1/contact').send({...fakeContact, userId: data.user.id})
 
     expect(response.status).toBe(400)
   
@@ -41,13 +42,13 @@ describe('Contacts Controller', () => {
   it('Should add a new contact on POST:/contact success', async () => {
     
     // create User
-    const responseUser = await request.post('/users').send(fakeUser)
+    const responseUser = await request.post('/api/v1/users').send(fakeUser)
     const data =  JSON.parse(responseUser.text)
-    
+   
     const token = await jwtAuthLogin.generateJWT(data.user.id)
 
 
-    const response = await request.post('/contact').set('x-access-token', token).send({...fakeContact})
+    const response = await request.post('/api/v1/contact').set('x-access-token', token).send({...fakeContact})
 
     expect(response.status).toBe(201)
     expect(response.text).toEqual("Contact added with success!")
@@ -57,14 +58,15 @@ describe('Contacts Controller', () => {
   it('Should return the list of contacts of logged user on GET:/contact success', async () => {
     
     // create User
-    const responseUser = await request.post('/users').send(fakeUser)
+    const responseUser = await request.post('/api/v1/users').send(fakeUser)
     const data =  JSON.parse(responseUser.text)
+   
     const token = await jwtAuthLogin.generateJWT(data.user.id)
 
     // add a new contact
-    await request.post('/contact').set('x-access-token', token).send({...fakeContact})
+    await request.post('/api/v1/contact').set('x-access-token', token).send({...fakeContact})
 
-    const response = await request.get('/contact').set('x-access-token', token).send({userId: data.user.id})
+    const response = await request.get('/api/v1/contact').set('x-access-token', token).send({userId: data.user.id})
 
     expect(response.status).toBe(201)
     expect(response.body).toHaveProperty("contacts")

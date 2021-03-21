@@ -20,7 +20,7 @@ describe('Users Controller', () => {
   const fakeUser = { email: 'fernanda@mail.com', password: "1234" }
 
   it('Should create a user and login on POST:/users success', async () => {
-    const response = await request.post('/users').send(fakeUser)
+    const response = await request.post('/api/v1/users').send(fakeUser)
     const data =  JSON.parse(response.text)
 
     expect(response.status).toBe(201)
@@ -28,33 +28,21 @@ describe('Users Controller', () => {
     expect(response.body).toEqual(expect.objectContaining({user: expect.objectContaining({email: 'fernanda@mail.com', id: data.user.id, created_at: data.user.created_at})  }))
   })
 
-  it('Should return 401 (Unauthorized) on POST:/users if provided email is already in use', async () => {
-    await request.post('/users').send(fakeUser)
-    const response = await request.post('/users').send(fakeUser)
+  it('Should return 409 (Unauthorized) on POST:/users if provided email is already in use', async () => {
+    await request.post('/api/v1/users').send(fakeUser)
+    const response = await request.post('/api/v1/users').send(fakeUser)
 
     expect(response.status).toBe(409)
     expect(response.body).toEqual({ message: "Email already registered.", status: "error" })
   })
 
-  // it('Should return all the users registered GET:/users success', async () => {
-    
-  //   const responseCreateUser = await request.post('/users').send(fakeUser)
-  //   const data =  JSON.parse(responseCreateUser.text)
-  //   const token = await jwtAuthLogin.generateJWT(data.user.id)
-
-  //   const response = await request.get('/users').set('x-access-token', token)
-
-  //   expect(response.status).toBe(201)
-  //   expect(response.body).toHaveProperty("users")
-  // })
-
   it('Should return the logged user GET:/users/me success', async () => {
     
-    const responseCreateUser = await request.post('/users').send(fakeUser)
+    const responseCreateUser = await request.post('/api/v1/users').send(fakeUser)
     const data =  JSON.parse(responseCreateUser.text)
     const token = await jwtAuthLogin.generateJWT(data.user.id)
 
-    const response = await request.get('/users/me').set('x-access-token', token)
+    const response = await request.get('/api/v1/users/me').set('x-access-token', token)
 
     expect(response.status).toBe(201)
     expect(response.body).toHaveProperty("user")

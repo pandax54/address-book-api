@@ -21,10 +21,10 @@ describe('Sessions Controller', () => {
   it('Should create the user and log on POST:/users success', async () => {
     
     // create User
-    await request.post('/users').send(fakeUser)
+    await request.post('/api/v1/users').send(fakeUser)
     
     // login User - match password and JWT auth
-    const responseLogin = await request.post('/login').send(fakeUser)
+    const responseLogin = await request.post('/api/v1/login').send(fakeUser)
 
     const {user: userLogged} =  JSON.parse(responseLogin.text)
 
@@ -35,11 +35,11 @@ describe('Sessions Controller', () => {
   it('Should return 401 (unauthorized) on POST:/login if provided wrong password', async () => {
     
     // create User
-    await request.post('/users').send(fakeUser)
+    await request.post('/api/v1/users').send(fakeUser)
     
     const wrongPassword = "3456"
     
-    const response = await request.post('/login').send({email: fakeUser.email, password: wrongPassword})
+    const response = await request.post('/api/v1/login').send({email: fakeUser.email, password: wrongPassword})
 
     expect(response.status).toBe(401)
     expect(response.body).toEqual({status: "error", message: "Email/Password does not match."})
@@ -48,11 +48,11 @@ describe('Sessions Controller', () => {
   it('Should return 401 (unauthorized) on POST:/login if provided a not registered email', async () => {
     
     // create User
-    await request.post('/users').send(fakeUser)
+    await request.post('/api/v1/users').send(fakeUser)
     
     const notRegistereduser = { email: 'fake@mail.com', password: "1234" }
     
-    const response = await request.post('/login').send(notRegistereduser)
+    const response = await request.post('/api/v1/login').send(notRegistereduser)
 
     expect(response.status).toBe(401)
     expect(response.body).toEqual({status: "error", message: "Email/Password does not match."})

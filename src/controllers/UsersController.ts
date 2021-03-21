@@ -10,14 +10,6 @@ const hashProvider = new BCryptHashProvider();
 const jwtAuthLogin = new JWTAuthentication();
 
 export default class UsersController {
-  async getAll(request: Request, response: Response): Promise<Response> {
-      const usersRepository = getCustomRepository(UserRepository)
-  
-      const users = await usersRepository.find()
-  
-      return response.status(201).json({ users })
-
-  }
 
   async show(request: Request, response: Response): Promise<Response> {
     const usersRepository = getCustomRepository(UserRepository)

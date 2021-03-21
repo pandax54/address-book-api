@@ -7,8 +7,6 @@ const usersRouter = Router();
 
 const userController = new UsersController();
 
-// usersRouter.get("/", verifyJWT, userController.getAll);
-
 usersRouter.get("/me", verifyJWT, userController.show);
 
 usersRouter.post(
