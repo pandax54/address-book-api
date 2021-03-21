@@ -26,7 +26,7 @@ describe('Contacts Controller', () => {
     address: "Endereço completo"
   }
 
-  it('Should return 400 (unauthorized) on POST:/contact if provided no authentication token', async () => {
+  it('Should return 401 (unauthorized) on POST:/contact if provided no authentication token', async () => {
     
     // create User
     const responseUser = await request.post('/api/v1/users').send(fakeUser)
@@ -35,7 +35,7 @@ describe('Contacts Controller', () => {
 
     const response = await request.post('/api/v1/contact').send({...fakeContact, userId: data.user.id})
 
-    expect(response.status).toBe(400)
+    expect(response.status).toBe(401)
   
   })
 

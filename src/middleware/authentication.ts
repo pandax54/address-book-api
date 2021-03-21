@@ -14,7 +14,7 @@ export default function verifyJWT(req: Request, res: Response, next: NextFunctio
       next()
 
     } catch (error) {
-      return res.status(400).send("Invalid token.")
+      return res.status(401).send("Invalid token.")
     }
     
 }

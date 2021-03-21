@@ -28,7 +28,7 @@ describe('Users Controller', () => {
     expect(response.body).toEqual(expect.objectContaining({user: expect.objectContaining({email: 'fernanda@mail.com', id: data.user.id, created_at: data.user.created_at})  }))
   })
 
-  it('Should return 409 (Unauthorized) on POST:/users if provided email is already in use', async () => {
+  it('Should return 409 on POST:/users if provided email is already in use', async () => {
     await request.post('/api/v1/users').send(fakeUser)
     const response = await request.post('/api/v1/users').send(fakeUser)
 
