@@ -7,7 +7,7 @@ const db = admin.database();
 
 class FirebaseRepository  {
 
-  public async findById(userId:string): Promise<any> {
+  public async findByUserId(userId:string): Promise<any> {
     const data = await db.ref(`/users${process.env.FIREBASE_INTEGRATION_TEST}/` + `user-${userId}` + '/contacts/').once("value", async (snapshot) => {
       return snapshot.val()
     })

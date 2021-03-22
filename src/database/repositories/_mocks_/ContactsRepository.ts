@@ -1,7 +1,7 @@
 
 class FirebaseRepository {
 
-  public async findById(userId: string): Promise<any> {
+  public async findByUserId(userId: string): Promise<any> {
     const data = {
       "contacts": {
         "-MWGImX_WMEH9BqhHwHl": {

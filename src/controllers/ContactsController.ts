@@ -12,7 +12,7 @@ export default class ContactsController {
         }
 
 
-        const contacts = await firebaseRepository.findById(userId)
+        const contacts = await firebaseRepository.findByUserId(userId)
 
         return response.status(201).json({contacts})
 

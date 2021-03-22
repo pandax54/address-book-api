@@ -37,6 +37,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^1.2.5",
     "@types/bcrypt": "^3.0.0",
     "@types/express": "^4.17.11",
     "@types/express-session": "^1.17.3",

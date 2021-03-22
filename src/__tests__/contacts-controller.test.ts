@@ -63,7 +63,7 @@ describe('Contacts Controller', () => {
    
     const token = await jwtAuthLogin.generateJWT(data.user.id)
 
-    // add a new contact
+    // add a new contact (without the login route)
     await request.post('/api/v1/contact').set('x-access-token', token).send({...fakeContact})
 
     const response = await request.get('/api/v1/contact').set('x-access-token', token).send({userId: data.user.id})
