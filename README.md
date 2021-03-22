@@ -35,12 +35,18 @@ Register your contacts in web and mobile using this API.
 
 ### install - Back-End
 
-First clone the repository.
+1. First clone the repository.
 ```
 $ yarn 
 ```
 
-You can use docker to setup the database:
+2. Create a .env file (remember to add your keys)
+
+```
+mv .env.example .env
+```
+
+3. You can use docker to setup the database:
 ```
 example:
 $ docker run --name addressBook -e POSTGRES_PASSWORD=mysecretpassword -p 5433:5432 -d postgres
@@ -48,6 +54,8 @@ $ docker run --name addressBook -e POSTGRES_PASSWORD=mysecretpassword -p 5433:54
 $ $ docker run --name [image-name] -e POSTGRES_PASSWORD=[set your password] -p [set your port]:5432 -d postgres
 
 ```
+
+4. Configure the name and other attributes of your database on ormconfig.json file and run migration. (Next topic)
 
 ### Setting the ormconfig.json
 In the root you must configure the ```ormconfig.json```with your informations:
