@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import AppError from "../../errors/AppError";
-import { FirebaseRepository } from "../../database/repositories/_mocks_/ContactsRepository"
+import { FirebaseRepository } from '../../database/repositories/_mocks_/ContactsRepository'
 
 const firebaseRepository = new FirebaseRepository()
 export default class ContactsController {
