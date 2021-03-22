@@ -6,6 +6,7 @@ import { UserRepository } from '../database/repositories/UserRepository'
 import JWTAuthentication from "../utils/generateAuth";
 const jwtAuthLogin = new JWTAuthentication();
 
+
 describe('Contacts Controller', () => {
   const psqlConnection = new PsQLConnectionManager()
   const request = supertest(app)
@@ -14,6 +15,7 @@ describe('Contacts Controller', () => {
   afterAll(async () => await psqlConnection.close())
 
   beforeEach(async () => {
+
     const repository = psqlConnection.getCustomRepository(UserRepository)
     repository.delete({})
   })
@@ -63,7 +65,7 @@ describe('Contacts Controller', () => {
    
     const token = await jwtAuthLogin.generateJWT(data.user.id)
 
-    // add a new contact (without the login route)
+    // add a new contact (without the login)
     await request.post('/api/v1/contact').set('x-access-token', token).send({...fakeContact})
 
     const response = await request.get('/api/v1/contact').set('x-access-token', token).send({userId: data.user.id})

@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import '../../config/Firebase';
+import '../Firebase';
 import admin from "firebase-admin";
 
 const db = admin.database();

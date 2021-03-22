@@ -1,8 +1,8 @@
 import { celebrate, Segments, Joi } from "celebrate";
 import { Router } from "express";
 import verifyJWT from "../middleware/authentication";
-// import ContactsController from "../controllers/ContactsController";
-import ContactsController from '../controllers/_mocks_/ContactsController';
+import ContactsController from "../controllers/ContactsController";
+// import ContactsController from '../controllers/_mocks_/ContactsController';
 
 const contactsRouter = Router();
 const contactsController = new ContactsController();

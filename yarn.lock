@@ -2702,6 +2702,11 @@ firebase@8.3.1, firebase@^8.3.1:
     "@firebase/storage" "0.4.5"
     "@firebase/util" "0.4.0"
 
+firestore-jest-mock@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/firestore-jest-mock/-/firestore-jest-mock-0.10.0.tgz#694bf1478fcf7147cabdcc05b8f06a7d025c08ec"
+  integrity sha512-3H/Ab0yxWUQM8GjpwIRDxzFHHVUu6ijcjol7nBuB21MPBtBA5hAwUmHtQlMGYtTHxhEal3Z9v3BHRz5tJK3zMA==
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
