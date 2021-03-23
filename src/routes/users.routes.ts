@@ -5,9 +5,9 @@ import UsersController from "../controllers/UsersController";
 
 const usersRouter = Router();
 
-const userController = new UsersController();
+const usersController = new UsersController();
 
-usersRouter.get("/me", verifyJWT, userController.show);
+usersRouter.get("/me", verifyJWT, usersController.show);
 
 usersRouter.post(
   "/",
@@ -17,7 +17,7 @@ usersRouter.post(
       password: Joi.string().required(),
     },
   }),
-  userController.create
+  usersController.create
 );
 
 export default usersRouter;

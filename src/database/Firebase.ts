@@ -6,4 +6,13 @@ admin.initializeApp({
     databaseURL: process.env.FIREBASE_DATABASEURL
 });
 
+// location.hostname
+//process.env.PSQL_HOST
+if (process.env.PSQL_HOST === "localhost") {
+    admin.firestore().settings({
+        host: "localhost:8080",
+        ssl: false
+    })
+}
+
 export default admin;

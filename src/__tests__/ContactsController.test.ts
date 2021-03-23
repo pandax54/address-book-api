@@ -1,11 +1,11 @@
+import admin from '@src/database/Firebase';
 import supertest from 'supertest'
 import { app } from '../app'
 import { PsQLConnectionManager } from '../database/connection'
 import { UserRepository } from '../database/repositories/UserRepository'
-const { mockCollection } = require('firestore-jest-mock/mocks/firestore');
+
 import JWTAuthentication from "../utils/generateAuth";
 const jwtAuthLogin = new JWTAuthentication();
-
 
 describe('Contacts Controller', () => {
   const psqlConnection = new PsQLConnectionManager()
@@ -15,6 +15,7 @@ describe('Contacts Controller', () => {
   afterAll(async () => await psqlConnection.close())
 
   beforeEach(async () => {
+    
     const repository = psqlConnection.getCustomRepository(UserRepository)
     repository.delete({})
   })
@@ -41,8 +42,6 @@ describe('Contacts Controller', () => {
   })
 
   it('Should add a new contact on POST:/contact success', async () => {
-    const firebase = require('firebase'); 
-    const db = firebase.firestore();
     
     // create User
     const responseUser = await request.post('/api/v1/users').send(fakeUser)
