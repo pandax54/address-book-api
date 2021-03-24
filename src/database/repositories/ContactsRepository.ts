@@ -1,39 +1,46 @@
 import { v4 as uuid } from 'uuid'
-import admin from '../Firebase';
+import admin from '../firebase'
 
-const db = admin.database();
+const db = admin.database()
 
-
-class FirebaseRepository  {
-
-  public async findByUserId(userId:string): Promise<any> {
-    const data = await db.ref(`/users${process.env.FIREBASE_INTEGRATION_TEST}/` + `user-${userId}` + '/contacts/').once("value", async (snapshot) => {
-      return snapshot.val()
-    })
+class FirebaseRepository {
+  public async findByUserId(user_id: string): Promise<any> {
+    const data = await db
+      .ref(
+        `/users${process.env.FIREBASE_INTEGRATION_TEST}/` +
+          `user-${user_id}` +
+          '/contacts/'
+      )
+      .once('value', async snapshot => {
+        return snapshot.val()
+      })
 
     return data
   }
 
   public async save(
-    userId: string,
-    firstName : string,
-    lastName: string,
-    phoneNumber: string,
+    user_id: string,
+    first_name: string,
+    last_name: string,
+    phone_number: string,
     address: string,
-    created_at: string) : Promise<void> {
-
+    created_at: string
+  ): Promise<void> {
     // --> users (collection) -> user-id (document) -> contacts (collection) -> contact (document)
-    db.ref(`/users${process.env.FIREBASE_INTEGRATION_TEST}/` + `user-${userId}`+ '/contacts/').push({
+    db.ref(
+      `/users${process.env.FIREBASE_INTEGRATION_TEST}/` +
+        `user-${user_id}` +
+        '/contacts/'
+    ).push({
       id: uuid(),
-      userId,
-      firstName,
-      lastName,
-      phoneNumber,
+      user_id,
+      first_name, 
+      last_name, 
+      phone_number, 
       address,
       created_at
     })
-
   }
 }
 
-export { FirebaseRepository };
+export { FirebaseRepository }

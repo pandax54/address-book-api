@@ -21,7 +21,10 @@ export class PsQLConnectionManager extends ConnectionManager {
     this.options = await this.getOptions()
     this.connection = await createConnection(
       Object.assign(this.options, {
-        database: process.env.ENV === 'test' ? 'addressBook_test' : this.options.database
+        database:
+          process.env.ENV === 'test'
+            ? 'addressBook_test'
+            : this.options.database
       })
     )
     return this.connection

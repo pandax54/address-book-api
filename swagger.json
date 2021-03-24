@@ -253,13 +253,13 @@
     "Contact": {
       "type": "object",
       "properties": {
-        "firstName": {
+        "first_name": {
           "type": "string"
         },
-        "lastName": {
+        "last_name": {
           "type": "string"
         },
-        "phoneNumber": {
+        "phone_number": {
           "type": "string"
         },
         "address": {
@@ -276,16 +276,16 @@
             "id": {
               "type": "string"
             },
-            "userId": {
+            "user_id": {
               "type": "string"
             },
-            "firstName": {
+            "first_name": {
               "type": "string"
             },
-            "lastName": {
+            "last_name": {
               "type": "string"
             },
-            "phoneNumber": {
+            "phone_number": {
               "type": "string"
             },
             "address": {

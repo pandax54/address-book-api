@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 import { v4 as uuid } from 'uuid'
-import { Exclude } from "class-transformer";
+import { Exclude } from 'class-transformer'
 
 @Entity('users')
 class User {
@@ -22,4 +22,4 @@ class User {
   }
 }
 
-export { User };
+export { User }

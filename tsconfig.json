@@ -23,6 +23,6 @@
   "files": [
     "session.request.d.ts"
 ],
-  "include": ["./src/**/*", "descarte/session.ts", "descarte/@types"],
+  "include": ["./src/**/*", "descarte/session.ts", "descarte/@types", "__tests__"],
   "exclude": ["./node_modules/", "dist/"]
 }
