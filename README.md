@@ -25,6 +25,7 @@ Register your contacts in web and mobile using this API.
 - Jest
 - Supertest
 - Swagger Ui
+- Pino
 
 
 </br>

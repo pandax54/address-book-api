@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify, decode } from 'jsonwebtoken'
+import authConfig from '../config/auth'
+
+const { secret } = authConfig.jwt
 
 export default function verifyJWT(
   req: Request,
@@ -14,7 +17,8 @@ export default function verifyJWT(
   try {
     const decoded = decode(token)
     req.user = decoded.sub
-    verify(token, process.env.APP_SECRET)
+
+    verify(token, secret)
     next()
   } catch (error) {
     return res.status(401).send('Invalid token.')

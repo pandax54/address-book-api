@@ -7,7 +7,7 @@ class FirebaseRepository {
   public async findByUserId(user_id: string): Promise<any> {
     const data = await db
       .ref(
-        `/users${process.env.FIREBASE_INTEGRATION_TEST}/` +
+        `/users/` +
           `user-${user_id}` +
           '/contacts/'
       )
@@ -28,7 +28,7 @@ class FirebaseRepository {
   ): Promise<void> {
     // --> users (collection) -> user-id (document) -> contacts (collection) -> contact (document)
     db.ref(
-      `/users${process.env.FIREBASE_INTEGRATION_TEST}/` +
+      `/users/` +
         `user-${user_id}` +
         '/contacts/'
     ).push({
