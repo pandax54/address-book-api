@@ -15,7 +15,7 @@ export default class UsersController {
 
     const user = await usersRepository.findById(request.user)
 
-    return response.status(201).json({ user: classToClass(user) })
+    return response.status(200).json({ user: classToClass(user) })
   }
 
   async create(request: Request, response: Response): Promise<Response> {

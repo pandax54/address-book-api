@@ -58,7 +58,7 @@ describe('Users Controller', () => {
       .get('/api/v1/users/me')
       .set('x-access-token', token)
 
-    expect(response.status).toBe(201)
+    expect(response.status).toBe(200)
     expect(response.body).toHaveProperty('user')
   })
 })

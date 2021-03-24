@@ -35,6 +35,7 @@ export default class SessionsController {
 
     return response
       .header('x-access-token', token)
-      .json({ status: 'ok', user: classToClass(user) })
+      .status(200)
+      .json({ user: classToClass(user) })
   }
 }

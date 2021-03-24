@@ -27,9 +27,9 @@ describe('Sessions Controller', () => {
     const { user: userLogged } = JSON.parse(responseLogin.text)
 
     expect(responseLogin.headers['x-access-token'])
+    expect(responseLogin.status).toBe(200)
     expect(responseLogin.body).toEqual(
       expect.objectContaining({
-        status: 'ok',
         user: expect.objectContaining({ ...userLogged })
       })
     )
