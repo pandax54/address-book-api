@@ -16,14 +16,20 @@ export default class ContactsController {
   }
 
   async create(request: Request, response: Response): Promise<Response> {
-    const { first_name, last_name, phone_number, address, created } = request.body
+    const {
+      first_name,
+      last_name,
+      phone_number,
+      address,
+      created
+    } = request.body
     const created_at = new Date(created).toString()
 
     firebaseRepository.save(
       request.user,
-      first_name, 
-      last_name, 
-      phone_number, 
+      first_name,
+      last_name,
+      phone_number,
       address,
       created_at
     )

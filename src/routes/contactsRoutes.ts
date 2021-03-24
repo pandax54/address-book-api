@@ -1,6 +1,6 @@
 import { celebrate, Segments, Joi } from 'celebrate'
 import { Router } from 'express'
-import verifyJWT from '../middleware/authentication'
+import verifyJWT from '../middlewares/authentication'
 import ContactsController from '../controllers/ContactsController'
 // import ContactsController from '../controllers/_mocks_/ContactsController';
 

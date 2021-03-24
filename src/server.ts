@@ -1,7 +1,7 @@
 import { app } from './app'
 import { PsQLConnectionManager } from './database/connection'
 import 'dotenv/config'
-import logger from './logger';
+import logger from './logger'
 
 const port = process.env.PORT
 const psqlConnection = new PsQLConnectionManager()

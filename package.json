@@ -7,7 +7,7 @@
     "dev": "ENV=dev tsnd --transpile-only --ignore-watch node_modules src/server.ts",
     "orm": "tsnd node_modules/typeorm/cli.js",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
-    "test": "ENV=test jest --passWithNoTests --noStackTrace --runInBand"
+    "test": "ENV=test FIREBASE_INTEGRATION_TEST=-test jest --passWithNoTests --noStackTrace --runInBand"
   },
   "repository": {
     "type": "git",

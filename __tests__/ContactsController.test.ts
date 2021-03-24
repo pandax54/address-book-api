@@ -17,18 +17,18 @@ describe('Contacts Controller', () => {
     repository.delete({})
   })
 
-  const fakeUser = { email: "fernanda@mail.com", password: "1234" }
+  const fakeUser = { email: 'fernanda@mail.com', password: '1234' }
   const fakeContact = {
-    first_name: "Fernanda",
-    last_name: "Penna",
-    phone_number: "+55027999753844",
-    address: "Buckingham Palace London SW1A 1AA"
+    first_name: 'Fernanda',
+    last_name: 'Penna',
+    phone_number: '+55027999753844',
+    address: 'Buckingham Palace London SW1A 1AA'
   }
 
   it('Should return 401 (unauthorized) on POST:/contact if provided no authentication token', async () => {
     // create User
     const responseUser = await request.post('/api/v1/users').send(fakeUser)
-    const data = responseUser.body 
+    const data = responseUser.body
 
     const response = await request
       .post('/api/v1/contact')

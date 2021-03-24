@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import 'express-async-errors'
 import 'dotenv/config'
 import swaggerUi from 'swagger-ui-express'
-import logger from './logger';
+import logger from './logger'
 import express, { NextFunction, Request, Response } from 'express'
 import AppError from './errors/AppError'
 import router from './routes'
@@ -32,8 +32,8 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     })
   }
 
-  logger.error(err)
-  
+  logger.debug(err)
+
   return response.status(500).json({
     status: 'error',
     message: 'Internal server error.'

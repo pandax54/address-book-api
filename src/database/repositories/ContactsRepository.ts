@@ -1,13 +1,13 @@
 import { v4 as uuid } from 'uuid'
-import admin from '../firebase'
+import { admin, db } from '../firebase'
 
-const db = admin.database()
+// const db = admin.database()
 
 class FirebaseRepository {
   public async findByUserId(user_id: string): Promise<any> {
     const data = await db
       .ref(
-        `/users/` +
+        `/users${process.env.FIREBASE_INTEGRATION_TEST}/` +
           `user-${user_id}` +
           '/contacts/'
       )
@@ -28,15 +28,15 @@ class FirebaseRepository {
   ): Promise<void> {
     // --> users (collection) -> user-id (document) -> contacts (collection) -> contact (document)
     db.ref(
-      `/users/` +
+      `/users${process.env.FIREBASE_INTEGRATION_TEST}/` +
         `user-${user_id}` +
         '/contacts/'
     ).push({
       id: uuid(),
       user_id,
-      first_name, 
-      last_name, 
-      phone_number, 
+      first_name,
+      last_name,
+      phone_number,
       address,
       created_at
     })
