@@ -71,7 +71,7 @@ describe('Contacts Controller', () => {
       .set('x-access-token', token)
       .send({ user_id: data.user.id })
 
-    expect(response.status).toBe(201)
+    expect(response.status).toBe(200)
     expect(response.body).toHaveProperty('contacts')
   })
 })

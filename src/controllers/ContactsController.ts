@@ -12,7 +12,7 @@ export default class ContactsController {
 
     const contacts = await firebaseRepository.findByUserId(user_id)
 
-    return response.status(201).json({ contacts })
+    return response.status(200).json({ contacts })
   }
 
   async create(request: Request, response: Response): Promise<Response> {
