@@ -11,7 +11,3 @@ admin.initializeApp({
   }),
   databaseURL: env.get('FIREBASE_DATABASEURL').required().asString()
 })
-
-const db = admin.database()
-
-export { admin, db }

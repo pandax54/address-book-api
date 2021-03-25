@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
-import { admin, db } from '../firebase'
+import admin from 'firebase-admin'
 
-// const db = admin.database()
+const db = admin.database()
 
 class FirebaseRepository {
   public async findByUserId(user_id: string): Promise<any> {
