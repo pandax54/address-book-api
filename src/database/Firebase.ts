@@ -1,10 +1,15 @@
 import admin from 'firebase-admin'
+import env from 'env-var'
 
-const serviceAccount = process.env.FIREBASE_KEY
+const CLIENT_EMAIL = env.get('FIREBASE_PRIVATE_KEY').required().asString()
 
 admin.initializeApp({
-  credential: admin.credential.cert(JSON.parse(serviceAccount)),
-  databaseURL: process.env.FIREBASE_DATABASEURL
+  credential: admin.credential.cert({
+    clientEmail: env.get('FIREBASE_CLIENT_EMAIL').required().asString(),
+    privateKey: CLIENT_EMAIL.replace(/\\n/g, '\n').replace(/\\n/g, '\n'),
+    projectId: env.get('FIREBASE_PROJECT_ID').required().asString()
+  }),
+  databaseURL: env.get('FIREBASE_DATABASEURL').required().asString()
 })
 
 const db = admin.database()

@@ -9,8 +9,8 @@ import {
 } from 'typeorm'
 
 export class PsQLConnectionManager extends ConnectionManager {
-  public connection: Connection = null
-  public options: ConnectionOptions = null
+  public connection?: Connection
+  public options?: ConnectionOptions
 
   constructor(conOptions?: ConnectionOptions) {
     super()
@@ -31,7 +31,7 @@ export class PsQLConnectionManager extends ConnectionManager {
   }
 
   async close(): Promise<void> {
-    await this.connection.close()
+    await this.connection?.close()
   }
 
   private async getOptions(): Promise<ConnectionOptions> {

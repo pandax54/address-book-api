@@ -8,18 +8,18 @@ export default function verifyJWT(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Response<unknown, Record<string, unknown>> | void {
   const headerParams = req.headers
-  const token: string = String(headerParams['x-access-token'])
+  const token = String(headerParams['x-access-token'])
 
   if (!token) return res.status(401).send('Access denied. No token provided.')
 
   try {
     const decoded = decode(token)
-    req.user = decoded.sub
+    req.user = decoded?.sub
 
     verify(token, secret)
-    next()
+    return next()
   } catch (error) {
     return res.status(401).send('Invalid token.')
   }

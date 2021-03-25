@@ -1,14 +1,14 @@
 import 'reflect-metadata'
 import 'express-async-errors'
-import 'dotenv/config'
-import swaggerUi from 'swagger-ui-express'
-import logger from './logger'
-import express, { NextFunction, Request, Response } from 'express'
-import AppError from './errors/AppError'
-import router from './routes'
-import { errors } from 'celebrate'
 import cors from 'cors'
+import express, { NextFunction, Request, Response } from 'express'
+import 'dotenv/config'
+import { errors } from 'celebrate'
+import swaggerUi from 'swagger-ui-express'
 import swaggerDocument from '../swagger.json'
+import AppError from './errors/AppError'
+import logger from './logger'
+import router from './routes'
 
 const app = express()
 app.use(cors())
