@@ -7,6 +7,7 @@ import {
   getCustomRepository,
   ObjectType
 } from 'typeorm'
+import env from 'env-var'
 
 export class PsQLConnectionManager extends ConnectionManager {
   public connection?: Connection
@@ -22,7 +23,7 @@ export class PsQLConnectionManager extends ConnectionManager {
     this.connection = await createConnection(
       Object.assign(this.options, {
         database:
-          process.env.ENV === 'test'
+        env.get('ENV').asString() === 'test'
             ? 'addressBook_test'
             : this.options.database
       })

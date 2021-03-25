@@ -2,8 +2,10 @@ import { app } from './app'
 import { PsQLConnectionManager } from './database/connection'
 import 'dotenv/config'
 import logger from './logger'
+import env from 'env-var'
 
-const port = process.env.PORT
+const port = env.get('PORT').required().asPortNumber()
+
 const psqlConnection = new PsQLConnectionManager()
 
 psqlConnection.connect().then(() => {
