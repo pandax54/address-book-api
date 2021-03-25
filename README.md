@@ -113,3 +113,9 @@ For API docs access:
 ```
 /api-docs
 ```
+
+https://address-book-fernanda.herokuapp.com/api-docs
+
+# Deploy in Heroku
+
+https://address-book-fernanda.herokuapp.com/api/v1/
