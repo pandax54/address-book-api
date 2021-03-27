@@ -59,7 +59,7 @@ $ $ docker run --name [image-name] -e POSTGRES_PASSWORD=[set your password] -p [
 4. Configure the name and other attributes of your database on ormconfig.json file and run migration. (Next topic)
 
 ### Setting the ormconfig.json
-In the root you must configure the ```ormconfig.js```adding DATABASE_URL in the .env:
+In the root you must configure the ```ormconfig.js```adding DATABASE_URL in the ```.env:
 
 ```
 // example -> postgres://<user>:<password>@<host>:<port>/<database>
