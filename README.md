@@ -124,3 +124,7 @@ https://address-book-fernanda.herokuapp.com/api-docs
 # Deploy in Heroku
 
 https://address-book-fernanda.herokuapp.com/api/v1/
+
+# Code Refactored
+
+https://github.com/pandax54/address-book-api-refac
