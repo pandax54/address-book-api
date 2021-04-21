@@ -22,6 +22,14 @@ const options = {
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
 
+app.use(function(request: Request,response: Response, next: NextFunction) {
+  response.status(404);
+
+  if (request.accepts('html')) {
+    response.render('404', { url: request.url });
+    return;
+  }
+
 app.use(errors())
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {

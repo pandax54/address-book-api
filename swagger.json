@@ -10,7 +10,7 @@
     }
   },
   "paths": {
-    "/api/v1/users": {
+    "/api/v1/user": {
       "post": {
         "tags": [
           "User"
@@ -54,7 +54,7 @@
         }
       }
     },
-    "/api/v1/users/me": {
+    "/api/v1/user/me": {
       "get": {
         "tags": [
           "User"

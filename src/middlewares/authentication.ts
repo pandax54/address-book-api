@@ -12,7 +12,7 @@ export default function verifyJWT(
   const headerParams = req.headers
   const token = String(headerParams['x-access-token'])
 
-  if (!token) return res.status(401).send('Access denied. No token provided.')
+  if (!token) return res.status(401).json({error: 'Access denied. No token provided.'})
 
   try {
     const decoded = decode(token)

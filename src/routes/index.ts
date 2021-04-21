@@ -6,7 +6,7 @@ import contactsRouter from './contactsRoutes'
 
 const router = Router()
 
-router.use('/users', usersRouter)
+router.use('/user', usersRouter)
 router.use('/login', sessionsRouter)
 router.use('/contact', contactsRouter)
 

@@ -3,6 +3,7 @@ import { app } from '../src/app'
 import { PsQLConnectionManager } from '../src/database/connection'
 import { UserRepository } from '../src/database/repositories/UserRepository'
 import JWTAuthentication from '../src/utils/generateAuth'
+
 const jwtAuthLogin = new JWTAuthentication()
 
 describe('Contacts Controller', () => {
@@ -27,7 +28,7 @@ describe('Contacts Controller', () => {
 
   it('Should return 401 (unauthorized) on POST:/contact if provided no authentication token', async () => {
     // create User
-    const responseUser = await request.post('/api/v1/users').send(fakeUser)
+    const responseUser = await request.post('/api/v1/user').send(fakeUser)
     const data = responseUser.body
 
     const response = await request
@@ -39,7 +40,7 @@ describe('Contacts Controller', () => {
 
   it('Should add a new contact on POST:/contact success', async () => {
     // create User
-    const responseUser = await request.post('/api/v1/users').send(fakeUser)
+    const responseUser = await request.post('/api/v1/user').send(fakeUser)
     const data = responseUser.body
 
     const token = await jwtAuthLogin.generateJWT(data.user.id)
@@ -55,7 +56,7 @@ describe('Contacts Controller', () => {
 
   it('Should return the list of contacts of logged user on GET:/contact success', async () => {
     // create User
-    const responseUser = await request.post('/api/v1/users').send(fakeUser)
+    const responseUser = await request.post('/api/v1/user').send(fakeUser)
     const data = responseUser.body
 
     const token = await jwtAuthLogin.generateJWT(data.user.id)

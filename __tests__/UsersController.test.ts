@@ -3,6 +3,7 @@ import { app } from '../src/app'
 import { PsQLConnectionManager } from '../src/database/connection'
 import { UserRepository } from '../src/database/repositories/UserRepository'
 import JWTAuthentication from '../src/utils/generateAuth'
+
 const jwtAuthLogin = new JWTAuthentication()
 
 describe('Users Controller', () => {
@@ -19,8 +20,8 @@ describe('Users Controller', () => {
 
   const fakeUser = { email: 'fernanda@mail.com', password: '1234' }
 
-  it('Should create a user and login on POST:/users success', async () => {
-    const response = await request.post('/api/v1/users').send(fakeUser)
+  it('Should create a user and login on POST:/user success', async () => {
+    const response = await request.post('/api/v1/user').send(fakeUser)
     const data = JSON.parse(response.text)
 
     expect(response.status).toBe(201)
@@ -36,9 +37,9 @@ describe('Users Controller', () => {
     )
   })
 
-  it('Should return 409 on POST:/users if provided email is already in use', async () => {
-    await request.post('/api/v1/users').send(fakeUser)
-    const response = await request.post('/api/v1/users').send(fakeUser)
+  it('Should return 409 on POST:/user if provided email is already in use', async () => {
+    await request.post('/api/v1/user').send(fakeUser)
+    const response = await request.post('/api/v1/user').send(fakeUser)
 
     expect(response.status).toBe(409)
     expect(response.body).toEqual({
@@ -47,15 +48,13 @@ describe('Users Controller', () => {
     })
   })
 
-  it('Should return the logged user GET:/users/me success', async () => {
-    const responseCreateUser = await request
-      .post('/api/v1/users')
-      .send(fakeUser)
+  it('Should return the logged user GET:/user/me success', async () => {
+    const responseCreateUser = await request.post('/api/v1/user').send(fakeUser)
     const data = JSON.parse(responseCreateUser.text)
     const token = await jwtAuthLogin.generateJWT(data.user.id)
 
     const response = await request
-      .get('/api/v1/users/me')
+      .get('/api/v1/user/me')
       .set('x-access-token', token)
 
     expect(response.status).toBe(200)

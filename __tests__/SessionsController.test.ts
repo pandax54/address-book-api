@@ -17,9 +17,9 @@ describe('Sessions Controller', () => {
 
   const fakeUser = { email: 'fernanda@mail.com', password: '1234' }
 
-  it('Should create the user and log on POST:/users success', async () => {
+  it('Should create the user and log on POST:/user success', async () => {
     // create User
-    await request.post('/api/v1/users').send(fakeUser)
+    await request.post('/api/v1/user').send(fakeUser)
 
     // login User - match password and JWT auth
     const responseLogin = await request.post('/api/v1/login').send(fakeUser)
@@ -37,7 +37,7 @@ describe('Sessions Controller', () => {
 
   it('Should return 401 (unauthorized) on POST:/login if provided wrong password', async () => {
     // create User
-    await request.post('/api/v1/users').send(fakeUser)
+    await request.post('/api/v1/user').send(fakeUser)
 
     const wrongPassword = '3456'
 
@@ -54,7 +54,7 @@ describe('Sessions Controller', () => {
 
   it('Should return 401 (unauthorized) on POST:/login if provided a not registered email', async () => {
     // create User
-    await request.post('/api/v1/users').send(fakeUser)
+    await request.post('/api/v1/user').send(fakeUser)
 
     const notRegistereduser = { email: 'fake@mail.com', password: '1234' }
 
