@@ -59,30 +59,35 @@ $ $ docker run --name [image-name] -e POSTGRES_PASSWORD=[set your password] -p [
 4. Configure the name and other attributes of your database on ormconfig.json file and run migration. (Next topic)
 
 ### Setting the ormconfig.json
-In the root you must configure the ```ormconfig.json```with your informations:
+In the root you must configure the ```ormconfig.js```adding DATABASE_URL in the ```.env:
+
+```
+// example -> postgres://<user>:<password>@<host>:<port>/<database>
+DATABASE_URL=postgres://[$USERNAME]:[$PASSWORD]@localhost:[$PORT]/[$DATABASE]
+```
 
 ```
 ----> do not forget to change for your settings
-  {
-    "type": "postgres",
-    "host": "localhost",
-    "port": [$PORT],
-    "username": [$USERNAME],
-    "password": [$PASSWORD], 
-    "database": [$DATABASE],
-    "synchronize": true,
-    "logging": true,
-    "migrations": [
-      "./src/database/migrations/*.ts"
-    ],
-    "cli": {
-      "migrationsDir": "./src/database/migrations/*.ts"
-    },
-    "entities": [
-      " ./src/models/*.ts"
-    ]
+
+module.exports = {
+  type: 'postgres',
+  url: env.get('DATABASE_URL').required().asString(),  --> here!
+  synchronize: false,
+  logging: false,
+  migrations: ['./src/database/migrations/*.ts'],
+  entities: ['./src/database/models/*.ts'],
+  cli: {
+    migrationsDir: './src/database/migrations'
+  },
+  extra: {
+    ssl:
+      env.get('ENV').asString() === 'dev'
+        ? false
+        : { rejectUnauthorized: false }
   }
+}
 ```
+
 Run the migrations using this command:
 ```
 $ yarn orm migration:run
@@ -101,7 +106,7 @@ $ yarn dev
 
 ## Testing
 
-Create a test database and run the migrations before running the tests. Change the database name on ormconfig.json for the test database.
+Create a test database, change the database name on ormconfig.js and run the migrations before running the tests.
 
 ```
 $ yarn test
@@ -119,3 +124,7 @@ https://address-book-fernanda.herokuapp.com/api-docs
 # Deploy in Heroku
 
 https://address-book-fernanda.herokuapp.com/api/v1/
+
+# Code Refactored
+
+https://github.com/pandax54/address-book-api-refac
