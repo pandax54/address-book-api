@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Project STRV backend",
   "main": "index.js",
+  "engines": {
+    "node": "14.15.x"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/src/server.js",
